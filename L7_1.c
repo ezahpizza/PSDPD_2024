@@ -1,31 +1,27 @@
 #include <stdio.h>
 #include <string.h>
 
-
-typedef struct {
+struct date {
     int day;
     int month;
     int year;
-} date_t;
+};
 
-
-typedef struct {
+struct tank {
     float capacity;
     float fuel_level;
-} tank_t;
+};
 
-
-typedef struct {
+struct auto_info {
     char make[50];
     char model[50];
     int odometer_reading;
-    date_t manufacture_date;
-    date_t purchase_date;
-    tank_t gas_tank;
-} auto_t;
+    struct date manufacture_date;
+    struct date purchase_date;
+    struct tank gas_tank;
+};
 
-
-void scan_date(date_t *date) {
+void scan_date(struct date *date) {
     printf("Enter day: ");
     scanf("%d", &date->day);
     printf("Enter month: ");
@@ -34,16 +30,14 @@ void scan_date(date_t *date) {
     scanf("%d", &date->year);
 }
 
-
-void scan_tank(tank_t *tank) {
+void scan_tank(struct tank *tank) {
     printf("Enter tank capacity (gallons): ");
     scanf("%f", &tank->capacity);
     printf("Enter current fuel level (gallons): ");
     scanf("%f", &tank->fuel_level);
 }
 
-
-void scan_auto(auto_t *auto_) {
+void scan_auto(struct auto_info *auto_) {
     printf("Enter make: ");
     scanf("%49s", auto_->make);
     printf("Enter model: ");
@@ -58,18 +52,15 @@ void scan_auto(auto_t *auto_) {
     scan_tank(&auto_->gas_tank);
 }
 
-
-void print_date(date_t date) {
+void print_date(struct date date) {
     printf("%02d/%02d/%04d", date.day, date.month, date.year);
 }
 
-
-void print_tank(tank_t tank) {
+void print_tank(struct tank tank) {
     printf("Capacity: %.2f gallons, Fuel level: %.2f gallons", tank.capacity, tank.fuel_level);
 }
 
-
-void print_auto(auto_t auto_) {
+void print_auto(struct auto_info auto_) {
     printf("Make: %s\n", auto_.make);
     printf("Model: %s\n", auto_.model);
     printf("Odometer reading: %d miles\n", auto_.odometer_reading);
@@ -85,7 +76,7 @@ void print_auto(auto_t auto_) {
 }
 
 int main() {
-    auto_t my_auto;
+    struct auto_info my_auto;
 
     printf("Enter automobile information:\n");
     scan_auto(&my_auto);
